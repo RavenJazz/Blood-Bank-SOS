@@ -56,18 +56,19 @@ html, body {
 
 /* ---- Mobile Shell ---- */
 .app-shell {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   background: linear-gradient(135deg, #f8f0ee 0%, #fcf8fb 50%, #f0edef 100%);
   padding: 0;
+  overflow: hidden;
 }
 
 .phone-frame {
   width: 100%;
   max-width: 430px;
-  min-height: 100vh;
+  height: 100%;
   background: var(--white);
   position: relative;
   overflow: hidden;
@@ -79,11 +80,11 @@ html, body {
 @media (min-width: 768px) {
   .app-shell {
     align-items: center;
-    padding: 40px 20px;
+    padding: 20px;
   }
   .phone-frame {
-    min-height: auto;
-    height: auto;
+    height: 850px;
+    max-height: 90vh;
     border-radius: var(--radius-xl);
     box-shadow: 0 24px 80px rgba(0,0,0,0.18);
   }
@@ -746,8 +747,8 @@ html, body {
 .scroll-content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
 }
 .scroll-content::-webkit-scrollbar { width: 0; }
 

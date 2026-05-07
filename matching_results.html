@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matching Donors – Circulate^PH</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .results-container { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+    .match-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .donor-card {
+      background: var(--white); border: 1.5px solid var(--outline-variant); border-radius: var(--radius-lg);
+      padding: 16px; display: flex; align-items: center; gap: 16px; position: relative;
+      transition: all 0.2s;
+    }
+    .donor-card:hover { border-color: var(--primary); box-shadow: var(--shadow); }
+    .rank-tag {
+      position: absolute; top: -1px; left: -1px; background: var(--primary); color: white;
+      padding: 2px 8px; font-size: 10px; font-weight: 800; border-radius: var(--radius-lg) 0 var(--radius) 0;
+    }
+    .avatar {
+      width: 56px; height: 56px; border-radius: var(--radius-full); background: var(--surface-container);
+      display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700;
+      color: var(--on-surface); position: relative; flex-shrink: 0;
+    }
+    .blood-badge {
+      position: absolute; bottom: -2px; right: -2px; width: 24px; height: 24px;
+      background: var(--primary); color: white; border-radius: 50%; border: 2px solid white;
+      display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800;
+    }
+    .donor-info { flex: 1; }
+    .donor-name { font-size: 16px; font-weight: 700; color: var(--on-surface); display: flex; align-items: center; gap: 4px; }
+    .verified-icon { width: 16px; height: 16px; color: #3498db; }
+    .donor-meta { font-size: 12px; color: var(--on-surface-variant); display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+    .meta-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--outline-variant); }
+    
+    .notify-btn {
+      padding: 8px 16px; border-radius: var(--radius); background: var(--primary-light); color: var(--primary);
+      font-size: 13px; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s;
+    }
+    .notify-btn:hover { background: var(--primary); color: white; }
+    .notify-btn.sent { background: #e8f5e9; color: #2e7d32; cursor: default; }
+
+    .batch-notify {
+      margin-top: 8px; background: var(--white); border: 2px solid var(--primary); color: var(--primary);
+      width: 100%; height: 56px; border-radius: var(--radius); font-weight: 700; display: flex;
+      align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: all 0.2s;
+    }
+    .batch-notify:hover { background: var(--primary-glow); }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <div class="phone-frame">
+    <!-- Top Nav -->
+    <div class="top-nav">
+      <a href="request_blood.html" class="back-btn">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+      <div class="headline-md" style="font-size: 18px;">Matching Donors</div>
+      <button class="back-btn" style="background:none"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></button>
+    </div>
+
+    <div class="scroll-content">
+      <div class="results-container">
+        <div class="match-header">
+          <div class="badge badge-critical">Critical Request</div>
+          <div class="body-base" style="font-size: 13px;">4 donors nearby</div>
+        </div>
+
+        <!-- Donor 1 -->
+        <div class="donor-card">
+          <div class="rank-tag">#1</div>
+          <div class="avatar">
+            JD
+            <div class="blood-badge">O-</div>
+          </div>
+          <div class="donor-info">
+            <div class="donor-name">
+              John D.
+              <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1.172-6.903l6.062-6.062-1.415-1.414-4.647 4.648-2.122-2.122-1.414 1.415 3.536 3.535z"/></svg>
+            </div>
+            <div class="donor-meta">
+              <span>1.2 km away</span>
+              <div class="meta-sep"></div>
+              <span>3 mos ago</span>
+            </div>
+          </div>
+          <button class="notify-btn" onclick="notify(this)">Notify</button>
+        </div>
+
+        <!-- Donor 2 -->
+        <div class="donor-card">
+          <div class="rank-tag" style="background:var(--secondary)">#2</div>
+          <div class="avatar">
+            MC
+            <div class="blood-badge" style="background:var(--secondary)">A-</div>
+          </div>
+          <div class="donor-info">
+            <div class="donor-name">
+              Maria C.
+              <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1.172-6.903l6.062-6.062-1.415-1.414-4.647 4.648-2.122-2.122-1.414 1.415 3.536 3.535z"/></svg>
+            </div>
+            <div class="donor-meta">
+              <span>2.8 km away</span>
+              <div class="meta-sep"></div>
+              <span>5 mos ago</span>
+            </div>
+          </div>
+          <button class="notify-btn" onclick="notify(this)">Notify</button>
+        </div>
+
+        <!-- Donor 3 -->
+        <div class="donor-card" style="opacity: 0.8;">
+          <div class="rank-tag" style="background:var(--tertiary)">#3</div>
+          <div class="avatar">
+            RP
+            <div class="blood-badge" style="background:var(--tertiary)">O-</div>
+          </div>
+          <div class="donor-info">
+            <div class="donor-name">Robert P.</div>
+            <div class="donor-meta">
+              <span>4.5 km away</span>
+              <div class="meta-sep"></div>
+              <span>1 yr ago</span>
+            </div>
+          </div>
+          <button class="notify-btn" onclick="notify(this)">Notify</button>
+        </div>
+
+        <div style="height: 20px;"></div>
+        
+        <button class="batch-notify" onclick="notifyAll(this)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/></svg>
+          Notify All Eligible Donors
+        </button>
+      </div>
+    </div>
+
+    <div class="bottom-action">
+      <div class="body-base" style="font-size: 12px; text-align: center; color: var(--on-surface-variant);">
+        Donors will receive an urgent notification and can choose to respond directly to your request.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container"><div class="toast" id="toastEl"></div></div>
+
+<script>
+  function toast(msg, type) {
+    const el = document.getElementById('toastEl');
+    el.textContent = msg;
+    el.className = 'toast show' + (type ? ' '+type : '');
+    setTimeout(() => el.className = 'toast', 3000);
+  }
+
+  function notify(btn) {
+    if(btn.classList.contains('sent')) return;
+    // Immediate navigation to confirmation screen
+    window.location.href = 'notify_confirm.html';
+  }
+
+  function notifyAll(btn) {
+    // Immediate navigation to confirmation screen
+    window.location.href = 'notify_confirm.html';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urgent Alert – Circulate^PH</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .notif-body {
+      height: 100%; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; padding: 20px; position: relative; overflow: hidden;
+    }
+    
+    /* Background ripple effect */
+    .ripple-bg {
+      position: absolute; width: 300px; height: 300px; background: var(--primary-light);
+      border-radius: 50%; opacity: 0.15; animation: pulse-bg 2.5s infinite;
+    }
+    @keyframes pulse-bg { 0% { transform: scale(1); opacity: 0.2; } 100% { transform: scale(2.5); opacity: 0; } }
+
+    .urgency-pill {
+      background: var(--primary); color: white; padding: 6px 16px; border-radius: var(--radius-full);
+      font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 6px; box-shadow: var(--shadow-red);
+      z-index: 10;
+    }
+    .pulse-dot { width: 6px; height: 6px; background: white; border-radius: 50%; animation: blink 1s infinite; }
+    
+    .blood-circle {
+      width: 140px; height: 140px; background: var(--white); border: 6px solid var(--primary);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 48px; font-weight: 800; color: var(--primary); margin: 32px 0;
+      box-shadow: 0 12px 30px rgba(192,57,43,0.3); z-index: 10; position: relative;
+    }
+    .blood-circle::before {
+      content: ''; position: absolute; inset: -12px; border: 1px solid var(--primary);
+      border-radius: 50%; opacity: 0.3; animation: expand 2s infinite linear;
+    }
+    @keyframes expand { from { transform: scale(1); opacity: 0.3; } to { transform: scale(1.3); opacity: 0; } }
+
+    .notif-card {
+      width: 100%; background: var(--white); border: 1.5px solid var(--outline-variant);
+      border-radius: var(--radius-lg); padding: 24px; text-align: left; z-index: 10;
+      box-shadow: var(--shadow);
+    }
+    .hospital-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+    .hospital-icon {
+      width: 44px; height: 44px; background: var(--primary-light); color: var(--primary);
+      border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .hospital-icon svg { width: 24px; height: 24px; fill: currentColor; }
+    .hospital-info h2 { font-size: 18px; font-weight: 800; color: var(--on-surface); }
+    .hospital-info p { font-size: 13px; color: var(--on-surface-variant); display: flex; align-items: center; gap: 4px; }
+    
+    .detail-grid { border-top: 1px solid var(--outline-variant); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .detail-row { display: flex; justify-content: space-between; font-size: 13px; }
+    .detail-label { color: var(--on-surface-variant); font-weight: 700; text-transform: uppercase; font-size: 11px; }
+    .detail-val { color: var(--on-surface); font-weight: 600; }
+
+    .action-buttons { width: 100%; margin-top: 32px; display: flex; flex-direction: column; gap: 12px; z-index: 10; }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <div class="phone-frame">
+    <div class="notif-body">
+      <div class="ripple-bg"></div>
+      
+      <div class="urgency-pill">
+        <div class="pulse-dot"></div>
+        Urgent Request Nearby
+      </div>
+
+      <div class="blood-circle">O-</div>
+
+      <div class="notif-card">
+        <div class="hospital-row">
+          <div class="hospital-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg>
+          </div>
+          <div class="hospital-info">
+            <h2>St. Luke's Medical Center</h2>
+            <p>
+              <svg viewBox="0 0 24 24" style="width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              2.5 km away
+            </p>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-row">
+            <span class="detail-label">Urgency</span>
+            <span class="badge badge-critical">Critical</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Patient</span>
+            <span class="detail-val">Emergency Surgery Trauma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" style="height:56px; font-size:16px;" onclick="window.location.href='donate.html'">I'll Donate</button>
+        <button class="btn" style="height:56px; font-size:14px; background:none; border:2px solid var(--outline); color:var(--on-surface);" onclick="window.location.href='donate.html'">Can't Help Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

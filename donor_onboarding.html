@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donation Intake – Circulate^PH</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .onboard-body {
+      height: 100%; display: flex; flex-direction: column; justify-content: center;
+      padding: 32px 20px; gap: 32px;
+    }
+
+    .header-block { text-align: center; }
+    .header-icon {
+      width: 72px; height: 72px; background: var(--primary-light); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+    }
+    .header-icon svg { width: 36px; height: 36px; color: var(--primary); fill: none; stroke: currentColor; stroke-width: 1.8; }
+    .header-block h1 { font-size: 26px; font-weight: 900; color: var(--on-surface); line-height: 1.2; }
+    .header-block p { font-size: 14px; color: var(--on-surface-variant); margin-top: 8px; line-height: 1.5; }
+
+    .choice-card {
+      border: 2px solid var(--outline-variant); border-radius: var(--radius-lg);
+      padding: 24px; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: flex-start; gap: 16px;
+      background: var(--white);
+    }
+    .choice-card:hover, .choice-card:active { border-color: var(--primary); background: var(--primary-light); }
+    .choice-icon {
+      width: 48px; height: 48px; background: var(--surface-low); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .choice-card:hover .choice-icon { background: white; }
+    .choice-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--primary); stroke-width: 2; }
+    .choice-body h2 { font-size: 16px; font-weight: 800; color: var(--on-surface); }
+    .choice-body p { font-size: 13px; color: var(--on-surface-variant); margin-top: 4px; line-height: 1.4; }
+
+    .divider-row {
+      display: flex; align-items: center; gap: 12px; color: var(--on-surface-variant); font-size: 12px; font-weight: 600;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--outline-variant); }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <div class="phone-frame">
+    <!-- Top Nav -->
+    <div class="top-nav">
+      <div class="back-btn" onclick="history.back()">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </div>
+      <div class="brand-logo">
+        <div class="logo-text"><span>Donation Intake</span></div>
+      </div>
+      <div style="width:40px;"></div>
+    </div>
+
+    <div class="scroll-content">
+      <div class="onboard-body">
+        <!-- Header -->
+        <div class="header-block">
+          <div class="header-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h1>Is this your first time donating?</h1>
+          <p>Help us tailor your experience based on your donation history.</p>
+        </div>
+
+        <!-- Choices -->
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <!-- First-time donor -->
+          <div class="choice-card" onclick="window.location.href='donor_registration_guide.html'">
+            <div class="choice-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <div class="choice-body">
+              <h2>Yes, I'm a First-Time Donor</h2>
+              <p>I'll guide you through the registration and eligibility process step by step.</p>
+            </div>
+          </div>
+
+          <div class="divider-row">
+            <div class="divider-line"></div>
+            OR
+            <div class="divider-line"></div>
+          </div>
+
+          <!-- Returning donor -->
+          <div class="choice-card" onclick="window.location.href='donor_registration.html'">
+            <div class="choice-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="choice-body">
+              <h2>No, I've Donated Before</h2>
+              <p>Sync your donation history and check your current eligibility status.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donor Registration – Circulate^PH</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .registration-body { padding: 20px; display: flex; flex-direction: column; gap: 24px; }
+    
+    .section-card {
+      background: var(--white); border: 1.5px solid var(--outline-variant); border-radius: var(--radius-lg);
+      padding: 20px; display: flex; flex-direction: column; gap: 16px;
+    }
+    
+    .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--on-surface); margin-bottom: 8px; }
+    .form-control {
+      width: 100%; h-height: 56px; border: 1.5px solid var(--outline-variant); border-radius: var(--radius);
+      padding: 0 16px; font-size: 15px; background: var(--surface-low); color: var(--on-surface);
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-control:focus { border-color: var(--primary); }
+    
+    /* Blood grid */
+    .blood-grid { display: grid; grid-cols: 4; gap: 10px; }
+    .blood-opt {
+      aspect-ratio: 1/1; border: 2px solid var(--outline-variant); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800;
+      cursor: pointer; transition: all 0.2s; background: var(--white); color: var(--on-surface);
+    }
+    .blood-opt.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+
+    .info-box {
+      background: #e0f2fe; border: 1px solid #bae6fd; border-radius: var(--radius);
+      padding: 14px; display: flex; gap: 12px;
+    }
+    .info-box svg { width: 20px; height: 20px; color: #0284c7; flex-shrink: 0; }
+    .info-box-text h4 { font-size: 13px; font-weight: 700; color: #0369a1; }
+    .info-box-text p { font-size: 11px; color: #0c4a6e; margin-top: 2px; line-height: 1.4; }
+
+    .upload-area {
+      border: 2px dashed var(--outline-variant); border-radius: var(--radius);
+      padding: 24px; display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 8px; cursor: pointer; transition: background 0.2s;
+    }
+    .upload-area:hover { background: var(--surface-low); }
+    .upload-area svg { width: 32px; height: 32px; color: var(--outline); }
+    .upload-area span:first-of-type { font-size: 14px; font-weight: 700; color: var(--on-surface); }
+    .upload-area span:last-of-type { font-size: 11px; color: var(--on-surface-variant); }
+
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; }
+    .toggle-switch { width: 44px; height: 24px; background: var(--primary); border-radius: 20px; position: relative; cursor: pointer; }
+    .toggle-switch::after { content: ''; position: absolute; right: 2px; top: 2px; width: 20px; height: 20px; background: white; border-radius: 50%; }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <div class="phone-frame">
+    <!-- Top Nav -->
+    <div class="top-nav">
+      <div class="back-btn" onclick="history.back()">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </div>
+      <div class="brand-logo">
+        <div class="logo-text">
+          <span>Donor Registration</span>
+        </div>
+      </div>
+      <div style="width:40px;"></div>
+    </div>
+
+    <div class="scroll-content">
+      <div class="registration-body">
+        <div>
+          <h2 style="font-size:24px; font-weight:800; color:var(--on-surface);">Become a Donor</h2>
+          <p style="font-size:14px; color:var(--on-surface-variant); margin-top:4px;">Join the response network and save lives.</p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); window.location.href='donor_notification.html'">
+          <div class="section-card">
+            <div class="form-group">
+              <label>Full Name (Legal Name)</label>
+              <input type="text" class="form-control" style="height:56px;" placeholder="e.g. Maria Santos" required />
+            </div>
+            
+            <div class="form-group">
+              <label>Blood Type</label>
+              <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;">
+                <div class="blood-opt" onclick="selectBlood(this)">A+</div>
+                <div class="blood-opt" onclick="selectBlood(this)">A-</div>
+                <div class="blood-opt selected" onclick="selectBlood(this)">B+</div>
+                <div class="blood-opt" onclick="selectBlood(this)">B-</div>
+                <div class="blood-opt" onclick="selectBlood(this)">O+</div>
+                <div class="blood-opt" onclick="selectBlood(this)">O-</div>
+                <div class="blood-opt" onclick="selectBlood(this)">AB+</div>
+                <div class="blood-opt" onclick="selectBlood(this)">AB-</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card" style="margin-top:16px;">
+            <div class="form-group">
+              <label>Primary Location</label>
+              <div style="display:flex; gap:10px;">
+                <input type="text" class="form-control" style="height:56px; flex:1;" placeholder="City or Hospital area" />
+                <button type="button" class="btn" style="width:56px; height:56px; padding:0; display:flex; align-items:center; justify-content:center; background:var(--surface-high);">
+                  <svg viewBox="0 0 24 24" style="width:20px; height:20px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="toggle-row">
+              <div>
+                <span style="display:block; font-size:14px; font-weight:700;">Emergency Availability</span>
+                <span style="font-size:12px; color:var(--on-surface-variant);">Receive alerts for critical needs</span>
+              </div>
+              <div class="toggle-switch"></div>
+            </div>
+          </div>
+
+          <div class="section-card" style="margin-top:16px;">
+            <div class="info-box">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 12 14 15 8"/></svg>
+              <div class="info-box-text">
+                <h4>Verification Badge</h4>
+                <p>Verified donors are prioritized by medical staff during critical shortages.</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Upload Donor Record</label>
+              <div class="upload-area">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Tap to upload document</span>
+                <span>JPG, PNG up to 5MB</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:24px; padding-bottom:40px;">
+            <button type="submit" class="btn btn-primary" style="width:100%; height:56px; font-size:16px;">Register as Donor</button>
+            <p style="text-align:center; font-size:12px; color:var(--on-surface-variant); margin-top:14px;">By registering, you agree to the Terms of Service.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function selectBlood(el) {
+    document.querySelectorAll('.blood-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+</script>
+</body>
+</html>

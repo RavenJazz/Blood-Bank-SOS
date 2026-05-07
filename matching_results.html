@@ -69,7 +69,7 @@
         </div>
 
         <!-- Donor 1 -->
-        <div class="donor-card">
+        <div class="donor-card" onclick="window.location.href='donor_profile.html'">
           <div class="rank-tag">#1</div>
           <div class="avatar">
             JD
@@ -86,11 +86,11 @@
               <span>3 mos ago</span>
             </div>
           </div>
-          <button class="notify-btn" onclick="notify(this)">Notify</button>
+          <button class="notify-btn" onclick="event.stopPropagation(); notify(this)">Notify</button>
         </div>
 
         <!-- Donor 2 -->
-        <div class="donor-card">
+        <div class="donor-card" onclick="window.location.href='donor_profile.html'">
           <div class="rank-tag" style="background:var(--secondary)">#2</div>
           <div class="avatar">
             MC
@@ -107,11 +107,11 @@
               <span>5 mos ago</span>
             </div>
           </div>
-          <button class="notify-btn" onclick="notify(this)">Notify</button>
+          <button class="notify-btn" onclick="event.stopPropagation(); notify(this)">Notify</button>
         </div>
 
         <!-- Donor 3 -->
-        <div class="donor-card" style="opacity: 0.8;">
+        <div class="donor-card" onclick="window.location.href='donor_profile.html'" style="opacity: 0.8;">
           <div class="rank-tag" style="background:var(--tertiary)">#3</div>
           <div class="avatar">
             RP
@@ -125,7 +125,7 @@
               <span>1 yr ago</span>
             </div>
           </div>
-          <button class="notify-btn" onclick="notify(this)">Notify</button>
+          <button class="notify-btn" onclick="event.stopPropagation(); notify(this)">Notify</button>
         </div>
 
         <div style="height: 20px;"></div>

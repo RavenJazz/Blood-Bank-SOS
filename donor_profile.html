@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donor Profile – Circulate^PH</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .donor-profile-body {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Hero Section */
+    .profile-hero {
+      background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 100%);
+      padding: 40px 24px 32px;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .profile-hero::after {
+      content: ''; position: absolute; top: -20px; right: -20px; width: 150px; height: 150px;
+      background: rgba(255,255,255,0.1); border-radius: 50%;
+    }
+    
+    .profile-avatar-large {
+      width: 100px; height: 100px; border-radius: 50%; background: white;
+      border: 4px solid rgba(255,255,255,0.3); margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; font-weight: 800; color: var(--primary);
+      position: relative; z-index: 2;
+    }
+    .verified-badge-large {
+      position: absolute; bottom: 0; right: 0; width: 32px; height: 32px;
+      background: #2ecc71; border: 3px solid white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .verified-badge-large svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 3; }
+
+    .profile-info h1 { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
+    .profile-info p { font-size: 14px; opacity: 0.85; margin-bottom: 16px; }
+
+    .stats-row {
+      display: flex; gap: 12px; justify-content: center;
+    }
+    .stat-pill {
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      padding: 6px 14px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* Content Area */
+    .profile-content {
+      padding: 24px;
+      background: var(--white);
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      margin-top: -24px;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .section-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--on-surface-variant);
+      margin-bottom: 12px;
+    }
+
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .info-box {
+      background: var(--surface-low); border: 1.5px solid var(--outline-variant);
+      border-radius: var(--radius-lg); padding: 16px;
+    }
+    .info-box span:first-child { font-size: 11px; font-weight: 700; color: var(--on-surface-variant); text-transform: uppercase; display: block; margin-bottom: 4px; }
+    .info-box span:last-child { font-size: 16px; font-weight: 700; color: var(--on-surface); }
+
+    .history-card {
+      background: var(--white); border: 1.5px solid var(--outline-variant);
+      border-radius: var(--radius-lg); padding: 16px; display: flex; align-items: center; gap: 16px;
+    }
+    .history-icon {
+      width: 44px; height: 44px; background: var(--primary-light); color: var(--primary);
+      border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .history-text h4 { font-size: 14px; font-weight: 700; color: var(--on-surface); }
+    .history-text p { font-size: 12px; color: var(--on-surface-variant); }
+
+    .badges-flex { display: flex; gap: 10px; flex-wrap: wrap; }
+    .donor-badge {
+      padding: 8px 12px; border-radius: var(--radius); background: var(--surface-container);
+      border: 1px solid var(--outline-variant); display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: var(--on-surface);
+    }
+    .donor-badge svg { width: 16px; height: 16px; color: var(--primary); }
+    
+    /* View only mode */
+    body.view-only .action-section { display: none; }
+  </style>
+</head>
+<body class="">
+<script>
+  // Simple check for view_only parameter
+  if (window.location.search.includes('view_only=true')) {
+    document.body.classList.add('view-only');
+  }
+</script>
+<div class="app-shell">
+  <div class="phone-frame">
+    <!-- Top Nav (Overlay) -->
+    <div style="position: absolute; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; padding: 16px 20px;">
+      <button class="back-btn" style="background: rgba(255,255,255,0.2); border: none; backdrop-filter: blur(8px); color: white;" onclick="history.back()">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="back-btn" style="background: rgba(255,255,255,0.2); border: none; backdrop-filter: blur(8px); color: white;">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </button>
+    </div>
+
+    <div class="scroll-content">
+      <div class="donor-profile-body">
+        <!-- Hero Section -->
+        <div class="profile-hero">
+          <div class="profile-avatar-large">
+            JD
+            <div class="verified-badge-large">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <div class="profile-info">
+            <h1>John Dela Cruz</h1>
+            <p>Verified Elite Donor · BGC, Taguig</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              12 Donations
+            </div>
+            <div class="stat-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Verified
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="profile-content">
+          <!-- Blood Type & Availability -->
+          <div class="info-grid">
+            <div class="info-box">
+              <span>Blood Type</span>
+              <span style="color: var(--primary)">O- Negative</span>
+            </div>
+            <div class="info-box">
+              <span>Distance</span>
+              <span>1.2 km away</span>
+            </div>
+          </div>
+
+          <!-- Donor Badges -->
+          <div>
+            <p class="section-label">Donor Badges</p>
+            <div class="badges-flex">
+              <div class="donor-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                Fast Responder
+              </div>
+              <div class="donor-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                Life Saver
+              </div>
+            </div>
+          </div>
+
+          <!-- Latest Activity -->
+          <div>
+            <p class="section-label">Latest Activity</p>
+            <div class="history-card">
+              <div class="history-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="history-text">
+                <h4>Last Donated</h4>
+                <p>Aug 12, 2023 · Makati Medical Center</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="action-section" style="margin-top: 8px;">
+            <button class="btn btn-primary" style="width: 100%; height: 56px;" onclick="window.location.href='notify_confirm.html'">
+              Send Urgent Request
+            </button>
+            <p style="text-align: center; font-size: 12px; color: var(--on-surface-variant); margin-top: 12px;">
+              John is currently eligible to donate and is within your priority match area.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

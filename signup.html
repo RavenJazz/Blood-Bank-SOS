@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up – Circulate^PH</title>
+  <meta name="description" content="Create your Circulate^PH account and join the Philippines' blood donation network." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .signup-header {
+      padding: 44px 24px 0;
+      background: var(--white);
+    }
+    .signup-header .brand-logo { margin-bottom: 28px; }
+    .signup-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: var(--on-surface); }
+    .signup-header p { font-size: 14px; color: var(--on-surface-variant); margin-top: 6px; line-height: 1.5; }
+    .red-accent { color: var(--primary); }
+    .top-back { padding: 16px 20px 0; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-grid .full { grid-column: 1/-1; }
+    .strength-bar { display: flex; gap: 4px; margin-top: 8px; }
+    .strength-seg { flex: 1; height: 3px; border-radius: 9999px; background: var(--surface-highest); transition: background .3s; }
+    .strength-seg.weak { background: var(--error); }
+    .strength-seg.fair { background: var(--secondary); }
+    .strength-seg.strong { background: #2e7d32; }
+    .strength-label { font-size: 11px; font-weight: 600; margin-top: 4px; color: var(--on-surface-variant); }
+    .terms-row { display: flex; align-items: flex-start; gap: 10px; }
+    .terms-row input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--primary); flex-shrink: 0; margin-top: 2px; cursor: pointer; }
+    .terms-row label { font-size: 13px; color: var(--on-surface-variant); line-height: 1.5; cursor: pointer; }
+    .signup-footer { text-align: center; font-size: 14px; color: var(--on-surface-variant); padding: 16px 24px 36px; }
+    .err-msg { font-size:12px; color:var(--error); font-weight:500; display:none; margin-top:3px; }
+    .has-error input { border-color:var(--error) !important; }
+    .has-error .err-msg { display:block; }
+    .step-dots { display: flex; gap: 6px; align-items: center; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--surface-highest); transition: background .3s, width .3s; }
+    .dot.active { width: 22px; border-radius: 4px; background: var(--primary); }
+    .section-content { padding: 24px 24px 0; display: flex; flex-direction: column; gap: 16px; }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+ <div class="phone-frame">
+
+  <!-- Top nav -->
+  <div class="top-nav">
+    <a href="login.html" class="back-btn" aria-label="Go back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="step-dots">
+      <div class="dot active" id="d1"></div>
+      <div class="dot" id="d2"></div>
+      <div class="dot" id="d3"></div>
+    </div>
+    <div style="width:40px"></div>
+  </div>
+
+  <div class="scroll-content">
+    <!-- Header -->
+    <div class="signup-header">
+      <div class="brand-logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24"><path d="M12 2C12 2 5 9.5 5 14a7 7 0 0 0 14 0C19 9.5 12 2 12 2z"/></svg>
+        </div>
+        <div class="logo-text">
+          <span>Circulate<sup style="font-size:10px">PH</sup></span>
+          <span>Blood Coordination</span>
+        </div>
+      </div>
+      <h1>Create Account</h1>
+      <p>Join the <span class="red-accent">Circulate^PH</span> network.<br>Saving lives starts here.</p>
+    </div>
+
+    <!-- Step 1: Personal Info -->
+    <div id="step1" class="section-content">
+      <p class="section-label">Step 1 of 3 · Personal Details</p>
+      <div class="form-grid">
+        <div class="input-group" id="fnGrp">
+          <label for="fname">First Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <input type="text" id="fname" placeholder="Juan" autocomplete="given-name"/>
+          </div>
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="input-group" id="lnGrp">
+          <label for="lname">Last Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <input type="text" id="lname" placeholder="Dela Cruz" autocomplete="family-name"/>
+          </div>
+          <span class="err-msg">Required.</span>
+        </div>
+      </div>
+      <div class="input-group" id="phoneGrp">
+        <label for="phone">Mobile Number</label>
+        <div class="input-wrapper">
+          <span class="input-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.39 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <input type="tel" id="phone" placeholder="+63 9XX XXX XXXX" autocomplete="tel"/>
+        </div>
+        <span class="err-msg">Enter a valid PH mobile number.</span>
+      </div>
+      <button class="btn btn-primary" onclick="toStep2()">Continue</button>
+    </div>
+
+    <!-- Step 2: Account Info (hidden) -->
+    <div id="step2" class="section-content" style="display:none">
+      <p class="section-label">Step 2 of 3 · Account Details</p>
+      <div class="input-group" id="emailGrp">
+        <label for="email">Email Address</label>
+        <div class="input-wrapper">
+          <span class="input-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></span>
+          <input type="email" id="email" placeholder="juan@example.com" autocomplete="email"/>
+        </div>
+        <span class="err-msg">Enter a valid email address.</span>
+      </div>
+      <div class="input-group" id="pwGrp">
+        <label for="pw">Password</label>
+        <div class="input-wrapper">
+          <span class="input-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <input type="password" id="pw" placeholder="Min. 8 characters" class="has-right-icon" autocomplete="new-password" oninput="checkStrength(this.value)"/>
+          <button class="input-icon-right" onclick="togglePw('pw',this)" type="button" aria-label="Show password">
+            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="strength-bar">
+          <div class="strength-seg" id="s1"></div>
+          <div class="strength-seg" id="s2"></div>
+          <div class="strength-seg" id="s3"></div>
+          <div class="strength-seg" id="s4"></div>
+        </div>
+        <span class="strength-label" id="sLabel"></span>
+        <span class="err-msg">Password must be at least 8 characters.</span>
+      </div>
+      <div class="input-group" id="cpwGrp">
+        <label for="cpw">Confirm Password</label>
+        <div class="input-wrapper">
+          <span class="input-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <input type="password" id="cpw" placeholder="Re-enter your password" class="has-right-icon" autocomplete="new-password"/>
+          <button class="input-icon-right" onclick="togglePw('cpw',this)" type="button" aria-label="Show password">
+            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <span class="err-msg">Passwords do not match.</span>
+      </div>
+      <button class="btn btn-primary" onclick="toStep3()">Continue</button>
+      <button class="btn btn-secondary" onclick="backTo(1)" style="margin-top:-4px">Back</button>
+    </div>
+
+    <!-- Step 3: Terms + Submit (hidden) -->
+    <div id="step3" class="section-content" style="display:none">
+      <p class="section-label">Step 3 of 3 · Almost Done!</p>
+      <div style="background:var(--surface-low);border-radius:var(--radius);padding:16px;border:1px solid var(--outline-variant)">
+        <p style="font-size:13px;color:var(--on-surface-variant);line-height:1.6">
+          By creating an account, you agree to Circulate^PH's data collection and usage policies for the purpose of blood donor matching and emergency coordination across the Philippines.
+        </p>
+      </div>
+      <div class="terms-row">
+        <input type="checkbox" id="terms"/>
+        <label for="terms">I agree to the <a class="link-text" href="#">Terms &amp; Conditions</a> and <a class="link-text" href="#">Privacy Policy</a></label>
+      </div>
+      <div class="terms-row">
+        <input type="checkbox" id="updates"/>
+        <label for="updates">Send me urgent blood request alerts and updates via SMS/email</label>
+      </div>
+      <button class="btn btn-primary" id="submitBtn" onclick="doSignup()">
+        <span id="submitTxt">Create My Account</span>
+        <div class="spinner" id="submitSpin"></div>
+      </button>
+      <button class="btn btn-secondary" onclick="backTo(2)" style="margin-top:-4px">Back</button>
+    </div>
+
+    <div class="signup-footer">
+      Already have an account? <a class="link-text" href="login.html">Log In</a>
+    </div>
+  </div>
+
+ </div>
+</div>
+
+<div class="toast-container"><div class="toast" id="toastEl"></div></div>
+
+<script>
+function togglePw(id, btn) {
+  const inp = document.getElementById(id);
+  const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password';
+  btn.innerHTML = show
+    ? `<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+    : `<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+}
+
+function toast(msg, type) {
+  const el = document.getElementById('toastEl');
+  el.textContent = msg;
+  el.className = 'toast show' + (type ? ' ' + type : '');
+  setTimeout(() => el.className = 'toast', 3200);
+}
+
+function setDots(step) {
+  [1,2,3].forEach(i => {
+    document.getElementById('d'+i).className = 'dot' + (i===step ? ' active' : i<step ? ' active' : '');
+  });
+}
+
+function toStep2() {
+  const fn = document.getElementById('fname').value.trim();
+  const ln = document.getElementById('lname').value.trim();
+  const ph = document.getElementById('phone').value.trim();
+  const fnG = document.getElementById('fnGrp'), lnG = document.getElementById('lnGrp'), phG = document.getElementById('phoneGrp');
+  fnG.classList.remove('has-error'); lnG.classList.remove('has-error'); phG.classList.remove('has-error');
+  let ok = true;
+  if(!fn) { fnG.classList.add('has-error'); ok=false; }
+  if(!ln) { lnG.classList.add('has-error'); ok=false; }
+  if(!/^(\+63|0)[0-9]{10}$/.test(ph.replace(/\s/g,''))) { phG.classList.add('has-error'); ok=false; }
+  if(!ok) return;
+  document.getElementById('step1').style.display='none';
+  document.getElementById('step2').style.display='flex';
+  setDots(2);
+  window.scrollTo(0,0);
+}
+
+function toStep3() {
+  const em = document.getElementById('email').value.trim();
+  const pw = document.getElementById('pw').value;
+  const cp = document.getElementById('cpw').value;
+  const eG = document.getElementById('emailGrp'), pG = document.getElementById('pwGrp'), cG = document.getElementById('cpwGrp');
+  eG.classList.remove('has-error'); pG.classList.remove('has-error'); cG.classList.remove('has-error');
+  let ok=true;
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { eG.classList.add('has-error'); ok=false; }
+  if(pw.length<8) { pG.classList.add('has-error'); ok=false; }
+  if(pw!==cp) { cG.classList.add('has-error'); ok=false; }
+  if(!ok) return;
+  document.getElementById('step2').style.display='none';
+  document.getElementById('step3').style.display='flex';
+  setDots(3);
+  window.scrollTo(0,0);
+}
+
+function backTo(step) {
+  document.getElementById('step1').style.display= step===1?'flex':'none';
+  document.getElementById('step2').style.display= step===2?'flex':'none';
+  document.getElementById('step3').style.display= step===3?'flex':'none';
+  setDots(step);
+  window.scrollTo(0,0);
+}
+
+function checkStrength(pw) {
+  let score=0;
+  if(pw.length>=8) score++;
+  if(/[A-Z]/.test(pw)) score++;
+  if(/[0-9]/.test(pw)) score++;
+  if(/[^A-Za-z0-9]/.test(pw)) score++;
+  const segs = [document.getElementById('s1'),document.getElementById('s2'),document.getElementById('s3'),document.getElementById('s4')];
+  const cl = score<=1?'weak':score<=2?'fair':'strong';
+  const labels = ['','Weak','Fair','Good','Strong'];
+  segs.forEach((s,i) => { s.className='strength-seg'+(i<score?' '+cl:''); });
+  document.getElementById('sLabel').textContent = pw.length?labels[score]:'';
+}
+
+function doSignup() {
+  if(!document.getElementById('terms').checked) { toast('Please accept the Terms & Conditions.','error'); return; }
+  const btn=document.getElementById('submitBtn');
+  document.getElementById('submitTxt').style.display='none';
+  document.getElementById('submitSpin').classList.add('show');
+  btn.disabled=true;
+  setTimeout(() => window.location.href='onboarding.html', 1800);
+}
+</script>
+</body>
+</html>

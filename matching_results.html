@@ -69,7 +69,7 @@
         </div>
 
         <!-- Donor 1 -->
-        <div class="donor-card" onclick="window.location.href='donor_profile.html'">
+        <div class="donor-card" onclick="window.location.href='donor_profile.html?type=${bloodType}&name=John D.&avatar=JD&dist=1.2 km away'">
           <div class="rank-tag">#1</div>
           <div class="avatar">
             JD
@@ -90,7 +90,7 @@
         </div>
 
         <!-- Donor 2 -->
-        <div class="donor-card" onclick="window.location.href='donor_profile.html'">
+        <div class="donor-card" onclick="window.location.href='donor_profile.html?type=${bloodType}&name=Maria C.&avatar=MC&dist=2.8 km away'">
           <div class="rank-tag" style="background:var(--secondary)">#2</div>
           <div class="avatar">
             MC
@@ -111,7 +111,7 @@
         </div>
 
         <!-- Donor 3 -->
-        <div class="donor-card" onclick="window.location.href='donor_profile.html'" style="opacity: 0.8;">
+        <div class="donor-card" onclick="window.location.href='donor_profile.html?type=${bloodType}&name=Robert P.&avatar=RP&dist=4.5 km away'" style="opacity: 0.8;">
           <div class="rank-tag" style="background:var(--tertiary)">#3</div>
           <div class="avatar">
             RP
@@ -154,6 +154,39 @@
     el.className = 'toast show' + (type ? ' '+type : '');
     setTimeout(() => el.className = 'toast', 3000);
   }
+
+  // Update donor blood types based on request
+  const urlParams = new URLSearchParams(window.location.search);
+  const bloodType = urlParams.get('type') || 'O-';
+  document.querySelectorAll('.blood-badge').forEach(badge => {
+    badge.textContent = bloodType;
+  });
+
+  // Dynamically set profile links to include blood type and donor details
+  const donors = [
+    { name: 'John D.', avatar: 'JD', dist: '1.2 km away', history: '3 mos ago', loc: 'Makati Medical Center' },
+    { name: 'Maria C.', avatar: 'MC', dist: '2.8 km away', history: '5 mos ago', loc: 'St. Luke\'s BGC' },
+    { name: 'Robert P.', avatar: 'RP', dist: '4.5 km away', history: '1 yr ago', loc: 'Philippine Red Cross' }
+  ];
+
+  window.onload = () => {
+    document.querySelectorAll('.donor-card').forEach((card, index) => {
+      const d = donors[index];
+      if (d) {
+        card.onclick = () => {
+          const params = new URLSearchParams({
+            type: bloodType,
+            name: d.name,
+            avatar: d.avatar,
+            dist: d.dist,
+            history: d.history,
+            loc: d.loc
+          });
+          window.location.href = `donor_profile.html?${params.toString()}`;
+        };
+      }
+    });
+  };
 
   function notify(btn) {
     if(btn.classList.contains('sent')) return;

@@ -106,20 +106,19 @@
   </style>
 </head>
 <body class="">
-<script>
-  // Simple check for view_only parameter
-  if (window.location.search.includes('view_only=true')) {
-    document.body.classList.add('view-only');
-  }
-</script>
 <div class="app-shell">
   <div class="phone-frame">
-    <!-- Top Nav (Overlay) -->
-    <div style="position: absolute; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; padding: 16px 20px;">
-      <button class="back-btn" style="background: rgba(255,255,255,0.2); border: none; backdrop-filter: blur(8px); color: white;" onclick="history.back()">
+    <!-- Individual Nav Buttons (to avoid any overlap issues) -->
+    <div style="position: absolute; top: 16px; left: 20px; z-index: 9999;">
+      <button class="back-btn" 
+              style="background: rgba(255,255,255,0.25); border: none; backdrop-filter: blur(10px); color: white; cursor: pointer;" 
+              onclick="window.history.back()"
+              ontouchstart="window.history.back()">
         <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       </button>
-      <button class="back-btn" style="background: rgba(255,255,255,0.2); border: none; backdrop-filter: blur(8px); color: white;">
+    </div>
+    <div style="position: absolute; top: 16px; right: 20px; z-index: 9999;">
+      <button class="back-btn" style="background: rgba(255,255,255,0.25); border: none; backdrop-filter: blur(10px); color: white; cursor: pointer;">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
       </button>
     </div>
@@ -207,5 +206,58 @@
     </div>
   </div>
 </div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  // View only mode
+  if (urlParams.get('view_only') === 'true') {
+    document.body.classList.add('view-only');
+  }
+  
+  // Update blood type
+  const bloodType = urlParams.get('type');
+  if (bloodType) {
+    const bloodBox = document.querySelector('.info-box span[style*="color: var(--primary)"]');
+    if (bloodBox) bloodBox.textContent = bloodType;
+  }
+
+  // Update donor details
+  const name = urlParams.get('name');
+  if (name) {
+    const nameEl = document.querySelector('.profile-info h1');
+    if (nameEl) nameEl.textContent = name;
+    // Update eligibility text too
+    const eligText = document.querySelector('.action-section p');
+    if (eligText) eligText.innerHTML = `<strong>${name.split(' ')[0]}</strong> is currently eligible to donate and is within your priority match area.`;
+  }
+  
+  const avatar = urlParams.get('avatar');
+  if (avatar) {
+    const avatarEl = document.querySelector('.profile-avatar-large');
+    if (avatarEl) {
+      const badge = avatarEl.querySelector('.verified-badge-large');
+      avatarEl.textContent = avatar;
+      if (badge) avatarEl.appendChild(badge);
+    }
+  }
+  
+  const dist = urlParams.get('dist');
+  if (dist) {
+    const distBoxes = document.querySelectorAll('.info-box span');
+    if (distBoxes.length >= 4) distBoxes[3].textContent = dist;
+    const subText = document.querySelector('.profile-info p');
+    if (subText) subText.textContent = `Verified Elite Donor · ${dist}`;
+  }
+  
+  const history = urlParams.get('history');
+  const loc = urlParams.get('loc');
+  if (history && loc) {
+    const historyTitle = document.querySelector('.history-text h4');
+    const historySub = document.querySelector('.history-text p');
+    if (historyTitle) historyTitle.textContent = `Last Donated ${history}`;
+    if (historySub) historySub.textContent = loc;
+  }
+</script>
 </body>
 </html>

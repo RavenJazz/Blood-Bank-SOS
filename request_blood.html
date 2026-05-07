@@ -44,7 +44,7 @@
   <div class="phone-frame">
     <!-- Top Nav -->
     <div class="top-nav">
-      <a href="onboarding.html" class="back-btn">
+      <a href="profile.html" class="back-btn">
         <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       </a>
       <div class="headline-md" style="font-size: 18px;">Request Blood</div>
@@ -143,13 +143,14 @@
   }
 
   function findDonors() {
+    const selectedBlood = document.querySelector('.blood-option.selected')?.textContent || 'O-';
     const btn = event.currentTarget;
     const originalContent = btn.innerHTML;
     btn.innerHTML = '<div class="spinner show"></div> Searching…';
     btn.disabled = true;
     
     setTimeout(() => {
-      window.location.href = 'matching_results.html';
+      window.location.href = `matching_results.html?type=${encodeURIComponent(selectedBlood)}`;
     }, 1500);
   }
   
